@@ -1,0 +1,22 @@
+def decrypt_vigenere(ciphertext, key):
+    key = key.upper()
+    plaintext = []
+    key_index = 0
+
+    for char in ciphertext:
+        if char.isalpha():
+            shift = ord(key[key_index % len(key)]) - ord('A')
+            base = ord('A') if char.isupper() else ord('a')
+            decoded_char = chr((ord(char) - base - shift) % 26 + base)
+            plaintext.append(decoded_char)
+            key_index += 1
+        else:
+            plaintext.append(char)  # keep spaces/punctuation unchanged
+
+    return ''.join(plaintext)
+
+
+# Example usage
+ciphertext = "DGPZW{WNUE_IL_BVR_HZNM}"
+key = ""
+print(decrypt_vigenere(ciphertext, key))
